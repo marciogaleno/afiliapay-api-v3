@@ -21,10 +21,8 @@ class CreateOffersTable extends Migration
             $table->enum("frequency", ["MONTHLY", "BIMONTHLY", "QUARTERLY", "SEMESTER", "YEARLY"])->nullable(); // SERÁ NULL QUANDO FOR SELECIONADO NO CAPO PAYMENT_TYPE O VALOR SINGLE_PAYMENT
             $table->boolean("automatic_renovation")->default(true); //Quando for payment_type RECURRING_PAYMENT
             $table->integer("amount_charges")->default(12);//Quando for payment_type RECURRING_PAYMENT e automatic_renovation false
-            $table->integer("product_id");
+            $table->foreignId("product_id")->constrained("products");
             $table->timestamps();
-
-            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 

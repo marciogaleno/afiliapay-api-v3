@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -34,8 +35,13 @@ class AuthController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        if (! $token = auth('api')->attempt($validator->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        if (auth()->validate($validator->validated())) {
+            $user = User::where("email", $request->email)->first();
+
+            if (! $token = auth('api')->claims(['tenant_id' => $user->tenant_id])->attempt($validator->validated())) {
+                return response()->json(['error' => 'Unauthorized'], 401);
+            }
+
         }
 
         return $this->respondWithToken($token);

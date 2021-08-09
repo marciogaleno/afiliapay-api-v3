@@ -32,6 +32,7 @@ class UsersController extends Controller
 
     public function update(UserRequest $request, int $id)
     {
+        return "ok";
         $user = $this->service->update($request->all(), $id);
 
         return response()->json([

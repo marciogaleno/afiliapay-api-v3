@@ -29,12 +29,9 @@ class CreateProductsTable extends Migration
             $table->string("url_thankyou_card")->nullable();
             $table->string("url_thankyou_pix")->nullable();
             $table->string("invoice_description")->nullable();
-            $table->integer("category_id");
-            $table->integer("user_id");
+            $table->foreignId("category_id")->constrained("categories");
+            $table->foreignId("user_id")->constrained("users");
             $table->timestamps();
-
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

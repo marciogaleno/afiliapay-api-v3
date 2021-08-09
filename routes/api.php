@@ -15,22 +15,29 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
 ], function ($router) {
-    Route::post('login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
+    Route::post('login', [\App\Http\Controllers\AuthController::class, 'login']);
     Route::post('logout', [\App\Http\Controllers\AuthController::class, 'logout']);
     Route::post('refresh', [\App\Http\Controllers\AuthController::class, 'refresh']);
     Route::post('me', [\App\Http\Controllers\AuthController::class, 'me']);
 });
 
+Route::post('register', [\App\Http\Controllers\Portal\UsersController::class, 'register']);
 
 Route::group([
     'middleware' => 'api',
     'prefix' => 'users'
 ], function ($router) {
-    Route::post('register', [\App\Http\Controllers\Portal\UsersController::class, 'register']);
     Route::put('{id}', [\App\Http\Controllers\Portal\UsersController::class, 'update']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'events'
+], function ($router) {
+    Route::post('/', [\App\Http\Controllers\EventsController::class, 'create']);
+    Route::get('/', [\App\Http\Controllers\EventsController::class, 'list']);
 });

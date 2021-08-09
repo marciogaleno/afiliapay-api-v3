@@ -28,10 +28,8 @@ class CreateCheckoutsTable extends Migration
             $table->string("top_banner", 250)->nullable();
             $table->string("side_banner", 250)->nullable();
             $table->string("background_color", 16);
-            $table->integer("offer_id");
+            $table->foreignId("offer_id")->constrained("offers");
             $table->timestamps();
-
-            $table->foreign('offer_id')->references('id')->on('offers');
         });
     }
 
