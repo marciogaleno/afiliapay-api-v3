@@ -12,7 +12,7 @@ trait Tenantable
 {
     protected static function boottenantable()
     {
-        if (request()->path() === "api/auth/login") {
+        if (request()->path() === "api/auth/login" || request()->path() === "api/users/register") {
             return;
         }
 

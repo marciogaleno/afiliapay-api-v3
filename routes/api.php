@@ -25,12 +25,11 @@ Route::group([
     Route::post('me', [\App\Http\Controllers\AuthController::class, 'me']);
 });
 
-Route::post('register', [\App\Http\Controllers\Portal\UsersController::class, 'register']);
-
 Route::group([
     'middleware' => 'api',
     'prefix' => 'users'
 ], function ($router) {
+    Route::post('register', [\App\Http\Controllers\Portal\UsersController::class, 'register']);
     Route::put('{id}', [\App\Http\Controllers\Portal\UsersController::class, 'update']);
 });
 
