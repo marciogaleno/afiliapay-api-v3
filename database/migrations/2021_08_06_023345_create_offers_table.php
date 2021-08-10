@@ -22,6 +22,7 @@ class CreateOffersTable extends Migration
             $table->boolean("automatic_renovation")->default(true); //Quando for payment_type RECURRING_PAYMENT
             $table->integer("amount_charges")->default(12);//Quando for payment_type RECURRING_PAYMENT e automatic_renovation false
             $table->foreignId("product_id")->constrained("products");
+            $table->unsignedBigInteger("tenant_id")->nullable()->constrained("offers")->index();
             $table->timestamps();
         });
     }

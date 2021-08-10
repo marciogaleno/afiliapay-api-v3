@@ -31,6 +31,7 @@ class CreateProductsTable extends Migration
             $table->string("invoice_description")->nullable();
             $table->foreignId("category_id")->constrained("categories");
             $table->foreignId("user_id")->constrained("users");
+            $table->unsignedBigInteger("tenant_id")->nullable()->constrained("offers")->index();
             $table->timestamps();
         });
     }

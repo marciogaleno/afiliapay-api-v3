@@ -21,6 +21,11 @@ trait Tenantable
         if (!is_null(auth('api')->payload()->get("tenant_id"))) {
            static::creating(function ($model) {
                 $model->tenant_id = auth('api')->payload()->get("tenant_id");
+
+                //Setar id do usuário logado se existir campo de user_id
+                if (in_array("user_id", $model->getFillable())) {
+                    $model->user_id = auth("api")->user()->id;
+                }
             });
         }
     }

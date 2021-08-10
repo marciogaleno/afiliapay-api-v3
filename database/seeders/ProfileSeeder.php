@@ -14,6 +14,7 @@ class ProfileSeeder extends Seeder
      */
     public function run()
     {
+        DB::table("profiles")->truncate();
         DB::table('profiles')->insert(['name' => 'Administrator']);
         DB::table('profiles')->insert(['name' => 'Client']);
     }

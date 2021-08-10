@@ -29,6 +29,7 @@ class CreateCheckoutsTable extends Migration
             $table->string("side_banner", 250)->nullable();
             $table->string("background_color", 16);
             $table->foreignId("offer_id")->constrained("offers");
+            $table->unsignedBigInteger("tenant_id")->nullable()->constrained("offers")->index();
             $table->timestamps();
         });
     }

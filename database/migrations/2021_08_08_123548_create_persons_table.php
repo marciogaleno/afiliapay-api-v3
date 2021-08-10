@@ -27,6 +27,7 @@ class CreatePersonsTable extends Migration
             $table->string("city");
             $table->string("state", 2);
             $table->foreignId("country_id")->constrained("countries");
+            $table->unsignedBigInteger("tenant_id")->nullable()->constrained("offers")->index();
             $table->timestamps();
         });
     }

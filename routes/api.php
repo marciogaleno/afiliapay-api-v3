@@ -33,10 +33,11 @@ Route::group([
     Route::put('{id}', [\App\Http\Controllers\Portal\UsersController::class, 'update']);
 });
 
+
 Route::group([
     'middleware' => 'api',
-    'prefix' => 'events'
+    'prefix' => 'products'
 ], function ($router) {
-    Route::post('/', [\App\Http\Controllers\EventsController::class, 'create']);
-    Route::get('/', [\App\Http\Controllers\EventsController::class, 'list']);
+    Route::post('/', [\App\Http\Controllers\Portal\ProductsController::class, 'create']);
+    Route::put('/{id}', [\App\Http\Controllers\Portal\ProductsController::class, 'update']);
 });
